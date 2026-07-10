@@ -64,7 +64,7 @@ export function setModelInputData(renderState: IRenderState, gptModel: IGpuGptMo
         buf[i] = rand.randint(0, 3);
     }
 
-    buf.set([2, 1, 0, 1, 1, 2, 0, 0, 0, 0, 0]);
+    buf.set([1, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2]); // toy-language G sentence: B A B C A B C A A B C
 
     gptModel.inputBuf = buf;
     gptModel.inputLen = 6;

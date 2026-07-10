@@ -34,7 +34,7 @@ Let's take a look at how the 4th token (index 3) is used to generate the 4th col
     breakAfter();
 
     commentary(wt)`
-We use the token index (in this case ${c_str('B', DimStyle.Token)} = ${c_dimRef('1', DimStyle.TokenIdx)}) to select the 2nd column of the ${c_blockRef('_token embedding matrix_', state.layout.tokEmbedObj)} on the left.
+We use the token index (in this case ${c_str('C', DimStyle.Token)} = ${c_dimRef('2', DimStyle.TokenIdx)}) to select the 3rd column of the ${c_blockRef('_token embedding matrix_', state.layout.tokEmbedObj)} on the left.
 Note we're using 0-based indexing here, so the first column is at index 0.
 
 This produces a column vector of size ${c_dimRef('_C_ = 48', DimStyle.C)}, which we describe as the token embedding.
@@ -47,7 +47,7 @@ This produces a column vector of size ${c_dimRef('_C_ = 48', DimStyle.C)}, which
     breakAfter();
 
     commentary(wt)`
-And since we're looking at our token ${c_str('B', DimStyle.Token)} in the 4th _position_ (t = ${c_dimRef('3', DimStyle.T)}), we'll take the 4th column of the ${c_blockRef('_position embedding matrix_', state.layout.posEmbedObj)}.
+And since we're looking at our token ${c_str('C', DimStyle.Token)} in the 4th _position_ (t = ${c_dimRef('3', DimStyle.T)}), we'll take the 4th column of the ${c_blockRef('_position embedding matrix_', state.layout.posEmbedObj)}.
 
 This also produces a column vector of size ${c_dimRef('_C_ = 48', DimStyle.C)}, which we describe as the position embedding.
     `;

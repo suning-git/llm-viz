@@ -101,8 +101,8 @@ export function initProgramState(canvasEl: HTMLCanvasElement, fontAtlasData: IFo
         B: 1,
         T: 11,
         C: 48,
-        nHeads: 3,
-        A: 48 / 3,
+        nHeads: 2, // patched: match 2-head teaching model (was 3)
+        A: 48 / 2, // patched: head_dim = C / nHeads = 24 (was 16)
         nBlocks: 3,
         vocabSize: 3,
     };

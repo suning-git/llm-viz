@@ -1,39 +1,43 @@
+# LLM Visualization · 课程定制版
 
-# Brendan Bycroft's Home Page & Projects
+A 3D interactive visualization of a GPT-style language model, running a real (tiny)
+network right in the browser. This is a fork of Brendan Bycroft's
+**[llm-viz](https://github.com/bbycroft/llm-viz)**, customized for the course
+**《从零构建智能模型》**（清华大学 · 丘成桐数学科学中心）.
 
-This repository contains my (Brendan's) homepage, as well as a number of non-trivial projects.
+Original, by the author, live at **https://bbycroft.net/llm**
 
-They are kept in a single repository for ease of deployment, as well as sharing a bunch of js utils
-which are otherwise a pain to share around.
+## 致谢 · Credits
 
-## Projects
+- **[Brendan Bycroft](https://github.com/bbycroft/llm-viz)** — the original 3D LLM
+  visualization (`llm-viz`). Everything rendered here is his work; this fork only swaps
+  in the course's own models and lightly edits the walkthrough text. See also
+  [`CREDITS.md`](./CREDITS.md).
+- **[Andrej Karpathy · minGPT](https://github.com/karpathy/minGPT)** — the toy A/B/C
+  sorting model that the default network is based on.
 
-The main projects are:
-* LLM Visualization: 3D interactive model of a GPT-style LLM network running inference.
-* [WIP] CPU Simulation: A 2D digital schematic editor with full a execution model, showcasing a simple
-  RISC-V based CPU
+## 这个 fork 改了什么 · What's different
 
-### LLM Visualization
+Kept **only** the LLM visualization from upstream. Removed the author's personal
+homepage, the RISC-V CPU simulator, and the fluid-sim demo.
 
-This project displays a 3D model of a working implementation of a GPT-style network. That
-is, the network topology that's used in OpenAI's GPT-2, GPT-3, (and maybe GPT-4).
+- `src/` · `public/` — the visualization app (walkthrough narration lightly edited).
+- `public/gpt-nano-*.json` — the course's own trained models, shown in the viz.
+- `model-gen/` — the training scripts that produce those models
+  (`train_toylang.py` / `train_2head.py`), alongside their exported weights.
+- `minimal_gpt/` — the **same toy model, runnable on your own laptop (CPU only)**:
+  load the weights, print every tensor, and hover-match it against the 3D site.
+  See [`minimal_gpt/README.md`](./minimal_gpt/README.md).
 
-The first network displayed with working weights is a tiny such network, which sorts a small list
-of the letters A, B, and C. This is the demo example model from Andrej Karpathy's
-[minGPT](https://github.com/karpathy/minGPT) implementation.
+## 本地运行 · Running locally
 
-The renderer also supports visualizing arbitrary sized networks, and works with the smaller gpt2
-size, although the weights aren't downloaded (it's 100's of MBs).
+```bash
+yarn                # install dependencies
+yarn dev            # dev server at http://localhost:3002
+yarn build          # static export → ./out/
+```
 
-### CPU Simulation (WIP; not exposed yet!)
+## 部署 · Deploy (GitHub Pages)
 
-This project runs 2D schematic digital circuits, with a fully fledged editor. The intent is to
-add a number of walkthroughs, showing things such as:
-  * how a simple RISC-V CPU is constructed
-  * the constituent parts down to gate level: instruction decode, ALU, add, etc
-  * higher level CPU ideas, like various levels of pipelining, caching, etc
-
-## Running Locally
-
-1. Install dependencies: `yarn`
-1. Start the dev server: `yarn dev`
+Configured for a project page at `https://<user>.github.io/llm-viz/`
+(`basePath: '/llm-viz'` in `next.config.js`). Serve the `out/` static export via Pages.

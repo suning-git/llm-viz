@@ -25,7 +25,7 @@ export function walkthrough04_SelfAttention(args: IWalkthroughArgs) {
     }
 
     let block0 = layout.blocks[0];
-    let head2 = block0.heads[2];
+    let head2 = block0.heads[nHeads - 1];
 
     setInitialCamera(state, new Vec3(-125.258, 0.000, -178.805), new Vec3(294.000, 12.800, 2.681));
     wt.dimHighlightBlocks = [layout.residual0, block0.ln1.lnResid, ...head2.cubes];
@@ -250,7 +250,7 @@ that it can only look in the past.
     }
 
     if (t_focusHeads.t0_dissolveHeads.t > 0.0) {
-        let head = block0.heads[2];
+        let head = head2; // patched: last head (nHeads-1), was hard-coded heads[2]
         let t = t_focusHeads.t0_dissolveHeads.t;
         for (let blk of head.headLabel.cubes) {
             blk.highlight = lerp(1.0, 0.0, t * 4) * 0.4;
@@ -668,7 +668,7 @@ export function focusSelfAttentionHead(args: IWalkthroughArgs, timers: ReturnTyp
     let { layout } = args;
     let { t0_dissolveHeads, t2_alignqkv } = timers;
 
-    let targetHeadIdx = 2;
+    let targetHeadIdx = layout.shape.nHeads - 1;
     let targetHead = layout.blocks[0].heads[targetHeadIdx];
 
     let block = layout.blocks[0];

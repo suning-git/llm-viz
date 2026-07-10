@@ -60,8 +60,8 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
 
     let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! Here we'll explore the model _nano-gpt_, with a mere 85,000 parameters.
 
-Its goal is a simple one: take a sequence of six letters: ${embed(ExampleInputOutput)}
-and sort them in alphabetical order, i.e. to "ABBBCC".`;
+Its goal: to speak a tiny language with a vocabulary of just three letters, A, B, and C: ${embed(ExampleInputOutput)}
+The language has three rules: after C, the next letter is always A; after the pair A-B, the next letter is always C; everywhere else, A or B is chosen freely. The model reads a sequence and predicts, at every position, the next letter.`;
 
     if (c0.t > 0) {
         for (let cube of layout.cubes) {
@@ -220,11 +220,11 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
         }
     }
 
-    commentary(wt)`So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
+    commentary(wt)`So what's the output? At every position, a prediction of the _next_ token in the sequence: probabilities that the next letter is
         going to be 'A', 'B', or 'C'.`
 
-    commentary(wt)`In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
-    the entire process.`;
+    commentary(wt)`Here the last letter fed in is a 'C', and the language's rules say a 'C' is always followed by an 'A' — so the model puts almost all of its
+    probability on 'A'. We can feed this prediction back into the top of the model, and repeat the entire process.`;
 
     breakAfter();
 }
@@ -356,7 +356,7 @@ export function processUpTo(state: IProgramState, timer: ITimeInfo, block: IBlkD
 const ExampleInputOutput: React.FC = () => {
     let state = useProgramState();
     let cols = state.display.tokenColors;
-    let chars = 'CBABBC'.split('');
+    let chars = 'BABCAB'.split('');
 
     return <div className={s.tableWrap}>
         <div>{chars.map((c, i) => {
@@ -372,7 +372,7 @@ const ExampleInputOutput: React.FC = () => {
 const ExampleTokenValues: React.FC = () => {
     let state = useProgramState();
     let cols = state.display.tokenIdxColors;
-    let chars = 'CBABBC'.split('');
+    let chars = 'BABCAB'.split('');
 
      return <div className={s.tableWrap}>
         <div>{chars.map((c, i) => {

@@ -26,12 +26,13 @@ used because the softmax we apply next does an exponentiation to convert to "odd
 To convert these scores into nice probabilities, we pass them through a softmax operation. Now, for
 each column, we have a probability the model assigns to each word in the vocabulary.
 
-In this particular model, it has effectively learned all the answers to the question of how to sort
-three letters, so the probabilities are heavily weighted toward the correct answer.
+In this particular model, it has effectively learned the rules of our tiny language, so wherever a rule
+forces the next letter (after a C, or after the pair A-B) the probabilities are heavily weighted toward
+that letter; in the free positions they split between A and B.
 
 When we're stepping the model through time, we use the last column's probabilities to determine the
-next token to add to the sequence. For example, if we've supplied six tokens into the model, we'll
-use the output probabilities of the 6th column.
+next token to add to the sequence. For example, once we've supplied a sequence into the model, we'll
+use the output probabilities of the final column.
 
 This column's output is a series of probabilities, and we actually have to pick one of them to use
 as the next in the sequence. We do this by "sampling from the distribution." That is, we randomly

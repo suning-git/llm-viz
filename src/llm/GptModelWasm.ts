@@ -184,7 +184,7 @@ export function constructModel(model: ITensorSet, config: IGptModelConfig, nativ
 
     let inputTokens = native.getModelTensor(nativeModel, TensorType.InputTokens);
 
-    inputTokens.buffer.set([2, 1, 0, 1, 1, 2, 0, 0, 0, 0, 0]);
+    inputTokens.buffer.set([1, 0, 1, 2, 0, 1, 2, 0, 0, 1, 2]); // toy-language G sentence: B A B C A B C A A B C
 
     {
         let sw = performance.now();
